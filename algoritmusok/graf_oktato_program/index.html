@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráfelméleti algoritmusok – interaktív oktató program</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Gráfelméleti algoritmusok – interaktív oktató program</h1>
+      <span class="tag">A böngésző frissítése esetén az adatok elvesznek</span>
+    </header>
+
+    <div class="layout">
+      <aside>
+        <div class="section">
+          <h2>Gráf beállításai</h2>
+          <div class="row">
+            <label for="n">Csúcsok száma</label>
+            <input id="n" type="number" min="2" max="12" value="5" />
+            <label><input id="directed" type="checkbox" /> Irányított</label>
+            <label><input id="weighted" type="checkbox" checked /> Súlyozott</label>
+          </div>
+
+          <div class="row" style="margin-top:30px">
+            <h2>Gráf felépítése fájlból</h2>
+            <input id="fileInput" type="file" accept=".txt,text/plain" />
+            <span class="hint">Elvárt fájlformátum: számok soronként, szóközzel elválasztva (N×N).</span>
+          </div>
+
+          <div class="divider"></div>
+          <div class="row">
+            <button id="resize" class="btn">Mátrix méretezése</button>
+            <button id="randomize" class="btn accent">Random mátrix</button>
+            <button id="clear" class="btn warn">Törlés</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Szomszédsági (súly/kapacitás) mátrix</h2>
+          <div class="hint">
+            0 = nincs él. Súly: Dijkstra. Irányított gráfban A→B ≠ B→A.
+          </div>
+          <div
+            id="matrix"
+            class="matrix"
+            aria-label="Szomszédsági matrix szerkesztő"
+          ></div>
+          <div class="row" style="margin-top: 8px">
+            <button id="buildGraph" class="btn primary">Gráf felépítése</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Algoritmus kiválasztása</h2>
+          <div id="algoTabs" class="tabs"></div>
+          <div id="algoParams" class="row" style="margin-top: 8px"></div>
+        </div>
+
+        <div class="section">
+          <h2>Léptetés</h2>
+          <div class="controls" style="margin-right: 10px">
+            <button id="prev" class="btn">Előző</button>
+            <button id="next" class="btn">Következő</button>
+            <button id="play" class="btn accent">Auto lejátszás</button>
+            <button id="reset" class="btn warn">Vissza az elejére</button>
+          </div>
+          <div class="kpi" style="margin-top: 8px">
+            <div class="card">
+              <div class="small">Lépés</div>
+              <div id="stepKpi">–</div>
+            </div>
+            <div class="card">
+              <div class="small">Állapot</div>
+              <div id="phaseKpi">–</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <div class="board">
+          <section class="pane">
+            <header>
+              <h3>Táblázatok (lépések és adatszerkezetek)</h3>
+            </header>
+            <div class="content">
+              <div id="buildSteps" class="section">
+                <h2>Gráf felépítésének lépései</h2>
+                <table>
+                  <thad>
+                    <tr>
+                      <th>#</th>
+                      <th>Művelet</th>
+                      <th>Részlet</th>
+                    </tr>
+                  </thead>
+                  <tbody id="buildTbody"></tbody>
+                </table>
+              </div>
+            </div>
+            <div>
+              <h2 style="margin:10px">Aktuális lépés magyarázata</h2>
+                <div id="explain" class="log">
+                  Itt jelennek meg a lépések szöveges magyarázatai.
+                </div>
+            </div>
+          </section>
+
+          <section class="pane">
+            <header>
+              <h3>Gráf vizualizáció</h3>
+            </header>
+            <div class="content">
+              <div class="graph-wrap">
+                <svg
+                  id="graphSvg"
+                  viewBox="0 0 1000 700"
+                  aria-label="Gráf rajz"
+                ></svg>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

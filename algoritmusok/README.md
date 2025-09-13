@@ -1,0 +1,2 @@
+# algoritmusok
+algoritmus leirasa
